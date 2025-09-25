@@ -1,0 +1,20 @@
+name: deploy-landing-site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: jino/runner:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Jino
+        uses: jino/deploy@v1
+        with:
+          token: ${{ secrets.JINO_TOKEN }}
+          project: landing-site_1
+          src: ./
