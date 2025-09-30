@@ -1,4 +1,17 @@
-/* Анимация пульсации кнопки */
+/* Начальная мягкая анимация blur Hero */
+.hero-bg img {
+  filter: blur(30px);
+  transform: scale(1.05); /* начальный легкий масштаб */
+  transition: filter 0.5s ease-out, transform 0.8s ease-out; /* плавная анимация blur и scale */
+}
+
+.hero-bg img.loaded {
+  filter: blur(6px);   /* конечный мягкий blur */
+  transform: scale(1); /* конечный масштаб */
+}
+
+
+/* Остальные стили */
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.08); }
@@ -7,3 +20,25 @@
 .btn-animated {
   animation: pulse 2s infinite;
 }
+
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-aos="fade-right"] {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+[data-aos="fade-right"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[x-cloak] { display: none !important; }
