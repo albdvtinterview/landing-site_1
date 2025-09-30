@@ -10,6 +10,13 @@
   <style>
     /* Скрытие элементов до инициализации Alpine.js */
     [x-cloak] { display: none !important; }
+
+    /* Статичный blur в Hero (без анимации) */
+    .hero-bg img {
+      filter: blur(6px);   /* постоянный blur */
+      transform: scale(1); /* без начального увеличения */
+      transition: none;    /* убираем плавное появление */
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -30,7 +37,7 @@
   <section class="h-screen flex flex-col justify-center items-center text-white text-center px-6 relative overflow-hidden">
     <!-- Фоновое изображение с легким blur -->
     <div class="absolute inset-0 hero-bg">
-      <img src="static/img/hero-bg.jpg" alt="Background" class="w-full h-full object-cover filter blur-30 scale-105 transition-filter duration-1500">
+      <img src="static/img/hero-bg.jpg" alt="Background" class="w-full h-full object-cover">
       <div class="absolute inset-0 bg-black/50"></div>
     </div>
 

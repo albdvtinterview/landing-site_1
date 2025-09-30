@@ -20,7 +20,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-
-AOS.init({
-  once: true, // анимация выполняется только один раз
-});
