@@ -4,358 +4,373 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Обучающий курс</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
   <style>
-    /* Скрытие элементов до инициализации Alpine.js */
-    [x-cloak] { display: none !important; }
-
-    /* Статичный blur в Hero (без анимации) */
-    .hero-bg img {
-      filter: blur(6px);   /* постоянный blur */
-      transform: scale(1); /* без начального увеличения */
-      transition: none;    /* убираем плавное появление */
-    }
+      /* Alpine cloaking */
+      [x-cloak] { display: none !important; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-  <!-- small topbar with a message -->
-  <div class="flex justify-between items-center px-4 py-2 bg-white/60 backdrop-blur-sm">
-    <div class="flex items-center gap-3 text-sm text-gray-700">
-      <span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 font-semibold">⚡ Новый поток</span>
-      <span>Начинаем — успей записаться и сэкономить 50%</span>
+  <div class="notification-bar">
+    <div class="notification-content">
+      <div class="notification-left">
+        <span class="notification-badge">⚡ Новый поток</span>
+        <span class="notification-text">Начинаем — успей записаться и сэкономить 50%</span>
+      </div>
+      <div class="notification-right">
+        Пообщаться с инструктором: <button onclick="window.location.href='tel:+79110083343'" class="notification-link">+79110083343</button>
+      </div>
     </div>
-    <div class="text-sm text-gray-500">Пообщаться с инструктором: <button onclick="window.location.href='tel:+79110083343'" class="underline hover:text-gray-700">+79110083343</button></div>
   </div>
 
-  <!-- Верхняя полоска -->
-  <div class="h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"></div>
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>✨</span>
+            Официальная аттестация
+          </div>
 
-  <!-- Hero -->
-  <section class="h-screen flex flex-col justify-center items-center text-white text-center px-6 relative overflow-hidden">
-    <!-- Фоновое изображение с легким blur -->
-    <div class="absolute inset-0 hero-bg">
-      <img src="static/img/hero-bg.jpg" alt="Background" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-black/50"></div>
-    </div>
+          <h1 class="hero-title">
+            Ваш опыт достоин диплома
+          </h1>
 
-    <!-- Контент -->
-    <h1 class="text-5xl md:text-6xl font-bold mb-6 relative z-10" data-aos="fade-down">
-      Ваш опыт достоин диплома
-    </h1>
-    <p class="text-lg mb-8 max-w-xl relative z-10" data-aos="fade-up" data-aos-delay="200">
-      Пройдите аттестацию удаленно и подтвердите экспертность официально
-    </p>
-    <button @click="openModal = true"
-      class="btn-animated px-6 py-3 bg-white text-purple-700 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition relative z-10">
-      <span class="mr-2">+</span> Занять место
-    </button>
+          <p class="hero-subtitle">
+            Пройдите аттестацию удаленно и подтвердите экспертность официально
+          </p>
 
-    <!-- Лицензия -->
-    <div class="mt-8 relative z-10" data-aos="fade-up" data-aos-delay="400">
-      <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto shadow-xl border border-white/20">
-        <div class="flex flex-col md:flex-row items-center gap-6">
-          <div class="flex-shrink-0">
-            <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-              <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
+          <div class="hero-actions">
+            <button @click="openModal = true" class="cta-button">
+              Занять место
+            </button>
+            <button onclick="window.location.href='tel:+79110083343'" class="secondary-button">
+              Позвонить
+            </button>
+          </div>
+        </div>
+
+        <div class="trust-sidebar">
+          
+          <div class="stats-card">
+            <span class="stats-number">500+</span>
+            <span class="stats-label">Выпущенных пилотов</span>
+          </div>
+
+          <div class="trust-card">
+            <div class="trust-header">
+              <div class="trust-icon">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div class="trust-content">
+                <h3>Образовательная лицензия</h3>
+                <p>
+                  № Л035-01271-78/01400997<br>
+                  <span>от 25.09.2024</span>
+                </p>
+              </div>
             </div>
           </div>
-          <div class="text-center md:text-left">
-            <h3 class="text-lg font-bold text-gray-800 mb-2">Образовательная лицензия</h3>
-            <p class="text-gray-600 leading-relaxed">
-              № Л035-01271-78/01400997<br>
-              <span class="text-sm">от 25.09.2024</span>
-            </p>
+
+          <div class="trust-card">
+            <div class="trust-header">
+              <div class="trust-icon">
+                <span>📞</span>
+              </div>
+              <div class="trust-content">
+                <h3>Поддержка 24/7</h3>
+                <p>
+                  +7 911 008 3343<br>
+                  <span>Всегда на связи</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Преимущества 1 -->
-  <section class="py-20 px-6 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Чего не будет?</h2>
-    <div class="grid md:grid-cols-3 gap-10">
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Никаких "погугли сам"</h3>
-        <p class="text-gray-600 text-center">Если у тебя проблема, мы решаем её вместе, а не кидаем ссылки на форумы десятилетней давности.</p>
+  <section class="section">
+    <h2 class="section-title">Чего не будет?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">❌</div>
+        <h3 class="feature-title">Никаких "погугли сам"</h3>
+        <p class="feature-text">Если у тебя проблема, мы решаем её вместе, а не кидаем ссылки на форумы десятилетней давности.</p>
       </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="200">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Никакого одиночества</h3>
-        <p class="text-gray-600 text-center">Ты не останешься один на один с монитором и неработающим конфигуратором. Ощущение, что тебя "кинули" после оплаты - это не про нас.</p>
+      <div class="feature-card">
+        <div class="feature-icon">👤</div>
+        <h3 class="feature-title">Никакого одиночества</h3>
+        <p class="feature-text">Ты не останешься один на один с монитором и неработающим конфигуратором. Ощущение, что тебя "кинули" после оплаты - это не про нас.</p>
       </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Никаких сухих лекций</h3>
-        <p class="text-gray-600 text-center">Мы не читаем  по бумажке, мы объясняем на пальцах, с шутками, на примерах из жизни и реальных крашей.</p>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title">Никаких сухих лекций</h3>
+        <p class="feature-text">Мы не читаем  по бумажке, мы объясняем на пальцах, с шутками, на примерах из жизни и реальных крашей.</p>
       </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Никакого игнора</h3>
-        <p class="text-gray-600 text-center">Мы не пропадаем на выходные или праздники. Если у ученика "горит", мы рядом.</p>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3 class="feature-title">Никакого игнора</h3>
+        <p class="feature-text">Мы не пропадаем на выходные или праздники. Если у ученика "горит", мы рядом.</p>
       </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Никакой формальщины</h3>
-        <p class="text-gray-600 text-center">Мы не строгие учителя, а твои бро, которые уже прошли этот путь и хотят, чтобы ты кайфанул от неба так же, как и мы.</p>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3 class="feature-title">Никакой формальщины</h3>
+        <p class="feature-text">Мы не строгие учителя, а твои бро, которые уже прошли этот путь и хотят, чтобы ты кайфанул от неба так же, как и мы.</p>
       </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Никаких "бывших" учеников</h3>
-        <p class="text-gray-600 text-center">Для нас ты не строчка, а часть семьи. Не закрываем личку после выдачи сертификата.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Преимущества 1 -->
-  <section class="py-20 px-6 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Что будет?</h2>
-    <div class="grid md:grid-cols-3 gap-10">
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">"Живой" чат 24/7</h3>
-        <p class="text-gray-600 text-center">Ты попадаешь в тусовку, где на твои вопросы отвечают не боты, а мы сами и опытные пилоты.</p>
-      </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="200">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Пожизненная поддержка</h3>
-        <p class="text-gray-600 text-center">Курс закончитя, а мы - нет. Мы не закрываем доступ к чатам, и не перестаем отвечать после выпуска. Ты наш на всегда.</p>
-      </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Оффлайн-движ и "обнимашки"</h3>
-        <p class="text-gray-600 text-center">Мы реальные люди. Мы организаем совместные полетушки, выезды на шашлыки и фестивали. С нами можно (и нужно!) встретится в живую, пожать руку и вместе разбить пару пропов.</p>
-      </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Как для своих</h3>
-        <p class="text-gray-600 text-center">Мы создали эту среду для себя. Здесь поддержка, драйв и люди, с которыми хочется не только летать, но и дружить.</p>
-      </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Все в одном месте</h3>
-        <p class="text-gray-600 text-center">Мы просто собрали в одном месте все то, чего нам самим не хватало на старте: человечность, честность и своих рядом.</p>
-      </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Мы не инфобизнес, Мы - фонаты неба.</h3>
-        <p class="text-gray-600 text-center">Мы учим так, как хотели бы чтобы учили нас. Нам по кайфу проводить здесь время вместе с вами.</p>
+      <div class="feature-card">
+        <div class="feature-icon">❤️</div>
+        <h3 class="feature-title">Никаких "бывших" учеников</h3>
+        <p class="feature-text">Для нас ты не строчка, а часть семьи. Не закрываем личку после выдачи сертификата.</p>
       </div>
     </div>
   </section>
 
-  <!-- Уникальные предложения -->
-  <section class="py-20 px-6 max-w-6xl mx-auto flex gap-12">
-    <div class="flex-shrink-0 w-1/3 sticky top-20 self-start">
-      <h2 class="text-3xl font-bold" data-aos="fade-right">Наши уникальные предложения</h2>
+  <section class="section">
+    <h2 class="section-title">Что будет?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3 class="feature-title">"Живой" чат 24/7</h3>
+        <p class="feature-text">Ты попадаешь в тусовку, где на твои вопросы отвечают не боты, а мы сами и опытные пилоты.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3 class="feature-title">Пожизненная поддержка</h3>
+        <p class="feature-text">Курс закончитя, а мы - нет. Мы не закрываем доступ к чатам, и не перестаем отвечать после выпуска. Ты наш на всегда.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤗</div>
+        <h3 class="feature-title">Оффлайн-движ и "обнимашки"</h3>
+        <p class="feature-text">Мы реальные люди. Мы организаем совместные полетушки, выезды на шашлыки и фестивали. С нами можно (и нужно!) встретится в живую, пожать руку и вместе разбить пару пропов.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+        <h3 class="feature-title">Как для своих</h3>
+        <p class="feature-text">Мы создали эту среду для себя. Здесь поддержка, драйв и люди, с которыми хочется не только летать, но и дружить.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏠</div>
+        <h3 class="feature-title">Все в одном месте</h3>
+        <p class="feature-text">Мы просто собрали в одном месте все то, чего нам самим не хватало на старте: человечность, честность и своих рядом.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✈️</div>
+        <h3 class="feature-title">Мы не инфобизнес, Мы - фонаты неба.</h3>
+        <p class="feature-text">Мы учим так, как хотели бы чтобы учили нас. Нам по кайфу проводить здесь время вместе с вами.</p>
+      </div>
     </div>
-    <div class="flex-1 flex flex-col gap-8">
-      <div class="p-6 bg-white rounded-2xl shadow-md transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Результат за считанные дни, а не месяцы</h3>
-        <p class="text-gray-600 text-center">Самый быстрый путь от распаковки до первого вылета.
-          Мы выкинули всю нудную теорию и оставили только то, что реально нужно для полета. Ты не будешь месяцами учить физику тока — ты сразу начнешь действовать. Наша методика отточена так, что даже человек с «нулем» знаний взлетает уже через пару занятий. Это самый короткий онлайн-маршрут в небо в России.</p>
+  </section>
+
+  <section class="section">
+    <div class="offers-section">
+      <div class="offers-sidebar">
+        <h2 class="offers-title">Наши уникальные предложения</h2>
       </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Онлайн-формат, который понятнее оффлайна</h3>
-        <p class="text-gray-600 text-center">Твой наставник всегда в твоем телефоне.
-          Боишься, что через экран ничего не понятно? Мы используем макросъемку пайки и 4K-ракурсы, которые ты никогда не увидишь, стоя за спиной инструктора в живую. А если возник затык — созваниваемся по видеосвязи, и мы буквально твоими руками исправляем ошибку. Ты учишься в своем темпе, на своем диване, но с ощущением, что мы сидим рядом.</p>
-      </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Гарантия «Взлетят все»</h3>
-        <p class="text-gray-600 text-center">Закрываем страх «у меня не получится» личным участием.
-          У нас не бывает «неспособных» учеников, бывают плохие учителя. Мы разжевываем каждый шаг настолько просто, что поймет даже ребенок. Если у тебя что-то не выходит — мы не кидаем методичку, а садимся и разбираемся вместе до победного. Мы берем на себя ответственность за твой результат: ты точно полетишь, без вариантов.</p>
-      </div>
-      <div class="p-6 bg-white rounded-2xl shadow-md transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="400">
-        <img src="https://via.placeholder.com/80" class="mb-4 mx-auto">
-        <h3 class="text-xl font-semibold mb-2 text-center">Вечное сопровождение и оффлайн-база</h3>
-        <p class="text-gray-600 text-center">Диплом — это не конец, а начало твоей карьеры.
-          Главный страх новичка: «Курс закончится, и я останусь один на один с поломками». У нас — всё наоборот. После курса ты попадаешь в лучшую инфраструктуру в стране: закрытые чаты, консультации по апгрейду и реальные встречи на полетушках. Ты покупаешь не видеоуроки, а пожизненную техподдержку и команду, которая не даст тебе бросить хобби.</p>
+      <div class="offers-grid">
+        <div class="offer-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="offer-title">Результат за считанные дни, а не месяцы</h3>
+          <p class="offer-text">Самый быстрый путь от распаковки до первого вылета.
+            Мы выкинули всю нудную теорию и оставили только то, что реально нужно для полета. Ты не будешь месяцами учить физику тока — ты сразу начнешь действовать. Наша методика отточена так, что даже человек с «нулем» знаний взлетает уже через пару занятий. Это самый короткий онлайн-маршрут в небо в России.</p>
+        </div>
+        <div class="offer-card">
+          <div class="feature-icon">📱</div>
+          <h3 class="offer-title">Онлайн-формат, который понятнее оффлайна</h3>
+          <p class="offer-text">Твой наставник всегда в твоем телефоне.
+            Боишься, что через экран ничего не понятно? Мы используем макросъемку пайки и 4K-ракурсы, которые ты никогда не увидишь, стоя за спиной инструктора в живую. А если возник затык — созваниваемся по видеосвязи, и мы буквально твоими руками исправляем ошибку. Ты учишься в своем темпе, на своем диване, но с ощущением, что мы сидим рядом.</p>
+        </div>
+        <div class="offer-card">
+          <div class="feature-icon">🎯</div>
+          <h3 class="offer-title">Гарантия «Взлетят все»</h3>
+          <p class="offer-text">Закрываем страх «у меня не получится» личным участием.
+            У нас не бывает «неспособных» учеников, бывают плохие учителя. Мы разжевываем каждый шаг настолько просто, что поймет даже ребенок. Если у тебя что-то не выходит — мы не кидаем методичку, а садимся и разбираемся вместе до победного. Мы берем на себя ответственность за твой результат: ты точно полетишь, без вариантов.</p>
+        </div>
+        <div class="offer-card">
+          <div class="feature-icon">🔄</div>
+          <h3 class="offer-title">Вечное сопровождение и оффлайн-база</h3>
+          <p class="offer-text">Диплом — это не конец, а начало твоей карьеры.
+            Главный страх новичка: «Курс закончится, и я останусь один на один с поломками». У нас — всё наоборот. После курса ты попадаешь в лучшую инфраструктуру в стране: закрытые чаты, консультации по апгрейду и реальные встречи на полетушках. Ты покупаешь не видеоуроки, а пожизненную техподдержку и команду, которая не даст тебе бросить хобби.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-20 bg-purple-700 text-center text-white">
-    <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Готов начать обучение?</h2>
-    <button @click="openModal = true"
-      class="btn-animated px-8 py-3 bg-white text-purple-700 rounded-full font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105">
-      <span class="mr-2">+</span> Забрать бонус за предзапись
-    </button>
-  </section>
-
-  <!-- Видео блок -->
-  <section class="py-20 px-6 max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">Смотрите видео о нашем курсе</h2>
-    <div class="relative" style="padding-top: 56.25%;">
-      <iframe src="https://rutube.ru/play/embed/26dc887976387282b8c121228ff867fb"
-              frameborder="0"
-              allowfullscreen
-              class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg">
-      </iframe>
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2 class="cta-title">Готов начать обучение?</h2>
+      <button @click="openModal = true" class="cta-button">
+        Забрать бонус за предзапись
+      </button>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-20 px-6 max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Вопросы и ответы</h2>
-    <div class="space-y-6">
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+  <section class="section video-section">
+    <h2 class="section-title">Смотрите видео о нашем курсе</h2>
+    <div class="video-container">
+      <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe src="https://rutube.ru/play/embed/26dc887976387282b8c121228ff867fb" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                frameborder="0" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2 class="section-title">Вопросы и ответы</h2>
+    <div class="space-y-4">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Обучение в шокле что это?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="200">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Сколько времени занимает обучение?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Рассписание занятий?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Что входит в программу обучения?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Как записаться на обучение?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Какие документы нужны для записи на обучение?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Можно ли совмещать обучение с работой или учебой в другом месте?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Какой документ выдается после окончания обучения??
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           В чем разница между Удостоверением о повышение квалификации, и Свидетельством о профессии рабочего, должности служащего?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Где можно использовать, выданные школой документы?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Какой опыт работы у ваших инструкторов?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Предоставляете ли вы оборудованиие для обучения или нужно иметь свое?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Можно ли получить консультацию по ремонту и обслуживанию дрона?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           На каких симуляторах/программах проходит обучение?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Предоставляете ли вы поддержку при окончании обучения?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
-      <details class="group p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <summary class="flex justify-between items-center font-semibold cursor-pointer">
+      <details class="faq-item">
+        <summary class="faq-summary">
           Есть ли у вас образовательная лицензия?
-          <span class="transition-transform group-open:rotate-45">+</span>
+          <span class="faq-icon">+</span>
         </summary>
-        <p class="mt-3 text-gray-600">Здесь можно написать короткий ответ.</p>
+        <p class="faq-content">Здесь можно написать короткий ответ.</p>
       </details>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-6 text-center bg-gray-900 text-gray-300">
-    © 2025 Твой бренд. Все права защищены.
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2025 Твой бренд. Все права защищены.</p>
+    </div>
   </footer>
 
-  <!-- Modal -->
-  <div x-show="openModal" x-cloak
-       class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-       x-transition.opacity>
-    <div class="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full relative"
-         x-transition.scale>
-      <button @click="openModal = false" type="button" aria-label="Закрыть"
-              class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">✕</button>
-      <h3 class="text-2xl font-bold mb-4">Оставьте заявку</h3>
+  <div x-show="openModal" x-cloak class="modal-overlay" x-transition.opacity>
+    <div class="modal-content" @click.away="openModal = false" x-transition.scale>
+      <button @click="openModal = false" class="modal-close">✕</button>
+      <h3 style="margin-top:0; font-size: 24px;">Оставьте заявку</h3>
       <form id="leadForm" novalidate>
-        <input name="name" type="text" placeholder="Имя" required
-               class="w-full mb-3 p-3 border rounded" />
-        <input name="email" type="email" placeholder="Email" required
-               class="w-full mb-3 p-3 border rounded" />
-        <input name="phone" id="phone" type="tel" placeholder="Телефон" required
-               class="w-full mb-3 p-3 border rounded" />
-        <button type="submit" class="btn-animated w-full py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition">
-          <span class="mr-2">+</span> Получить ранний доступ
+        <div class="form-group">
+          <label style="display:block; margin-bottom: 5px; font-size: 13px; color: #666;">Имя</label>
+          <input name="name" type="text" placeholder="Введите имя" required class="form-input" />
+        </div>
+        <div class="form-group">
+           <label style="display:block; margin-bottom: 5px; font-size: 13px; color: #666; margin-top:15px;">Email</label>
+          <input name="email" type="email" placeholder="example@mail.ru" required class="form-input" />
+        </div>
+        <div class="form-group">
+           <label style="display:block; margin-bottom: 5px; font-size: 13px; color: #666; margin-top:15px;">Телефон</label>
+          <input name="phone" id="phone" type="tel" placeholder="+7 (___) ___-__-__" required class="form-input" />
+        </div>
+        <button type="submit" class="form-submit">
+          Получить ранний доступ
         </button>
+        <p style="font-size: 12px; color: #999; margin-top: 15px; text-align: center;">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
       </form>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="js/app.js"></script>
-  <script>
-    AOS.init({ once: true });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
