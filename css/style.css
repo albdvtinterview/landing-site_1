@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Avito-inspired Business Palette */
+  /* Цветовая палитра */
   --avito-blue: #00AAFF;
   --avito-blue-hover: #0095DF;
   --avito-green: #0ACF83;
@@ -11,8 +11,8 @@
   --avito-border: #E5E5E5;
   --bg-page: #F0F2F5;
   --bg-white: #FFFFFF;
-  
-  /* New neon colors for inspiration */
+
+  /* Неоновые акценты */
   --neon-cyan: #00E5FF;
   --neon-orange: #FF9100;
 
@@ -91,22 +91,18 @@ body {
 
 /* --- Hero Section --- */
 .hero-section {
-  /* Dark background for neon effect */
   background: #11141C;
-
-  /* Spacing */
   padding: 60px 0 80px;
 
-  /* --- STRICT DESIGN UPDATES --- */
+  /* Геометрия Hero блока */
   margin: 12px auto 40px;
   border-radius: 24px;
   max-width: 1280px;
   width: calc(100% - 24px);
   border: 1px solid #2A2C38;
-  /* --------------------------- */
 
   position: relative;
-  overflow: hidden; /* Clips the canvas */
+  overflow: hidden;
 }
 
 /* Canvas positioning */
@@ -116,11 +112,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* Behind content */
+  z-index: 0;
   pointer-events: none;
 }
 
-/* Ensure content sits above canvas */
+/* Контент героя */
 .hero-container {
   position: relative;
   z-index: 2;
@@ -139,7 +135,6 @@ body {
 
 .hero-badge {
   display: inline-block;
-  /* Adjusted for dark theme */
   background: rgba(0, 170, 255, 0.15);
   color: var(--neon-cyan);
   padding: 6px 12px;
@@ -156,7 +151,6 @@ body {
   line-height: 1.1;
   letter-spacing: -1px;
   margin: 0 0 24px;
-  /* White text for dark background */
   color: white;
 }
 
@@ -205,7 +199,6 @@ body {
   background: #E0E2E8;
 }
 
-/* Adjust secondary button for dark hero background */
 .hero-secondary-btn {
     background: transparent;
     color: white;
@@ -231,12 +224,10 @@ body {
   border-radius: var(--radius-md);
   padding: 20px;
   box-shadow: var(--shadow-card);
-  /* Slight glow for dark background contrast context */
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .stats-card {
-  /* Darker background for stats card */
   background: #0A0C12;
   color: white;
   border-radius: var(--radius-md);
@@ -360,6 +351,19 @@ body {
   margin: 0;
 }
 
+.offers-sidebar {
+  /* Делаем блок липким */
+  position: sticky;
+
+  /* Отступ сверху (чтобы не прилипал вплотную к краю браузера) */
+  top: 40px;
+
+  /* ВАЖНО: В гридах элемент по умолчанию растягивается на всю высоту.
+     Нам нужно сжать его до высоты контента, иначе sticky не сработает. */
+  height: fit-content;
+  align-self: start;
+}
+
 .offers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -387,17 +391,30 @@ body {
   color: #666;
 }
 
-/* --- CTA Section --- */
+/* --- CTA Section (Clean Full Width / Чистый, без затемнения краев) --- */
 .cta-section {
-  background: linear-gradient(95deg, #2A2C38 0%, #191919 100%);
-  border-radius: var(--radius-lg);
-  margin: 0 20px 60px;
-  padding: 60px 40px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 60px 0;
+  border-radius: 0;
+  padding: 100px 20px;
+
+  /* Фон: Чистый градиент без перекрытия тенями */
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%),
+    linear-gradient(135deg, #1C1E26 0%, #0F0F10 100%);
+
+  border: none;
+  border-top: 1px solid rgba(0, 229, 255, 0.3); /* Светящаяся грань сверху */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+  /* УБРАЛИ агрессивные тени. Оставили только легкий внутренний блик для чистоты */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+
   text-align: center;
   color: white;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  overflow: hidden;
 }
 
 .cta-title {
@@ -551,21 +568,21 @@ body {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .trust-sidebar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
-  
+
   .features-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .offers-section {
     grid-template-columns: 1fr;
     padding: 24px;
   }
-  
+
   .offers-grid {
     grid-template-columns: 1fr;
   }
@@ -575,15 +592,15 @@ body {
   .hero-title {
     font-size: 32px;
   }
-  
+
   .trust-sidebar {
     grid-template-columns: 1fr;
   }
-  
+
   .hero-actions {
     flex-direction: column;
   }
-  
+
   .cta-section {
     padding: 40px 20px;
   }
@@ -592,7 +609,7 @@ body {
 [x-cloak] { display: none !important; }
 
 /* ==========================================================================
-   SPACESHIP & DECORATION STYLES (NEW)
+   SPACESHIP & DECORATION STYLES
    ========================================================================== */
 
 /* --- 1. Hero Spaceship (Main) --- */
@@ -602,52 +619,47 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Passes clicks through */
-  z-index: 1; /* Below text (which is z-index: 2), above canvas */
+  pointer-events: none;
+  z-index: 1;
   overflow: visible;
 }
 
 .spaceship-img {
   position: absolute;
-  /* Coordinates based on your screenshot (Left-Center) */
   top: 45%;
-  left: -5%;
-  max-width: 40%;
+  left: 25%;
+  transform: translateY(-50%) scale(0.9);
+  max-width: 60%;
   height: auto;
   filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
-
-  /* Initial state for animation */
   opacity: 0;
-  transform: translateY(30px) translateX(-30px);
   transition: opacity 1s ease-out, transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .spaceship-img.loaded {
   opacity: 1;
-  /* Final state */
-  transform: translateY(0) translateX(0);
+  transform: translateY(-50%) scale(1);
 }
 
-/* Mobile Adjustments for Hero Ship */
 @media (max-width: 900px) {
   .spaceship-img {
-    max-width: 60%;
+    max-width: 80%;
     top: auto;
-    bottom: 5%;
+    bottom: 0%;
     left: 50%;
-    transform: translateX(-50%) translateY(30px);
+    transform: translate(-50%, 20px);
   }
 
   .spaceship-img.loaded {
-      transform: translateX(-50%) translateY(0);
+      transform: translate(-50%, 0);
   }
 }
 
-/* --- 2. Decorative Ships (Profile & Rear Views) --- */
+/* --- 2. Decorative Ships --- */
 
 .ship-decoration-container {
     position: absolute;
-    z-index: 0; /* Behind content */
+    z-index: 0;
     pointer-events: none;
 }
 
@@ -658,23 +670,22 @@ body {
     animation: floatShip 6s ease-in-out infinite;
 }
 
-/* Profile View (Section "Что будет?") */
+/* Profile View */
 .profile-view {
     top: -80px;
     right: 5%;
     width: 350px;
-    opacity: 0.5;
+    opacity: 1;
     transform: rotate(-5deg);
-    /* Color correction to match theme */
     filter: grayscale(20%) sepia(20%) hue-rotate(180deg) saturate(200%);
 }
 
-/* Rear View (CTA Section) */
+/* Rear View */
 .rear-view {
     bottom: -120px;
     left: 10%;
     width: 450px;
-    opacity: 0.7;
+    opacity: 1;
     mix-blend-mode: screen;
 }
 
@@ -684,19 +695,18 @@ body {
     100% { transform: translateY(0px); }
 }
 
-/* Mobile Adjustments for Decorations */
 @media (max-width: 900px) {
     .profile-view {
         width: 180px;
         top: -20px;
         right: 0;
-        opacity: 0.3;
+        opacity: 0.85;
     }
 
     .rear-view {
         width: 280px;
         bottom: -60px;
         left: 0;
-        opacity: 0.4;
+        opacity: 1;
     }
 }
