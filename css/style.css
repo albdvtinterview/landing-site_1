@@ -590,3 +590,113 @@ body {
 }
 
 [x-cloak] { display: none !important; }
+
+/* ==========================================================================
+   SPACESHIP & DECORATION STYLES (NEW)
+   ========================================================================== */
+
+/* --- 1. Hero Spaceship (Main) --- */
+.spaceship-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Passes clicks through */
+  z-index: 1; /* Below text (which is z-index: 2), above canvas */
+  overflow: visible;
+}
+
+.spaceship-img {
+  position: absolute;
+  /* Coordinates based on your screenshot (Left-Center) */
+  top: 45%;
+  left: -5%;
+  max-width: 40%;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
+
+  /* Initial state for animation */
+  opacity: 0;
+  transform: translateY(30px) translateX(-30px);
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.spaceship-img.loaded {
+  opacity: 1;
+  /* Final state */
+  transform: translateY(0) translateX(0);
+}
+
+/* Mobile Adjustments for Hero Ship */
+@media (max-width: 900px) {
+  .spaceship-img {
+    max-width: 60%;
+    top: auto;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+  }
+
+  .spaceship-img.loaded {
+      transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* --- 2. Decorative Ships (Profile & Rear Views) --- */
+
+.ship-decoration-container {
+    position: absolute;
+    z-index: 0; /* Behind content */
+    pointer-events: none;
+}
+
+.ship-decoration-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: floatShip 6s ease-in-out infinite;
+}
+
+/* Profile View (Section "Что будет?") */
+.profile-view {
+    top: -80px;
+    right: 5%;
+    width: 350px;
+    opacity: 0.5;
+    transform: rotate(-5deg);
+    /* Color correction to match theme */
+    filter: grayscale(20%) sepia(20%) hue-rotate(180deg) saturate(200%);
+}
+
+/* Rear View (CTA Section) */
+.rear-view {
+    bottom: -120px;
+    left: 10%;
+    width: 450px;
+    opacity: 0.7;
+    mix-blend-mode: screen;
+}
+
+@keyframes floatShip {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Mobile Adjustments for Decorations */
+@media (max-width: 900px) {
+    .profile-view {
+        width: 180px;
+        top: -20px;
+        right: 0;
+        opacity: 0.3;
+    }
+
+    .rear-view {
+        width: 280px;
+        bottom: -60px;
+        left: 0;
+        opacity: 0.4;
+    }
+}

@@ -27,6 +27,10 @@
   <section class="hero-section">
     <canvas id="circuit-canvas"></canvas>
 
+    <div id="spaceship-layer" class="spaceship-layer">
+        <img src="assets/ship-hero.png" alt="Pilot Ship" class="spaceship-img" id="hero-ship">
+    </div>
+
     <div class="hero-container">
       <div class="hero-grid">
         <div class="hero-content">
@@ -54,7 +58,7 @@
         </div>
 
         <div class="trust-sidebar">
-          
+
           <div class="stats-card">
             <span class="stats-number">500+</span>
             <span class="stats-label">Выпущенных пилотов</span>
@@ -132,8 +136,13 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" style="position: relative;">
     <h2 class="section-title">Что будет?</h2>
+
+    <div class="ship-decoration-container profile-view">
+        <img src="assets/ship-profile.png" alt="Drone Side View" class="ship-decoration-img">
+    </div>
+
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">💬</div>
@@ -202,8 +211,13 @@
     </div>
   </section>
 
-  <section class="cta-section">
-    <div class="cta-content">
+  <section class="cta-section" style="position: relative; overflow: hidden;">
+
+    <div class="ship-decoration-container rear-view">
+        <img src="assets/ship-rear.png" alt="Drone Rear Engine" class="ship-decoration-img">
+    </div>
+
+    <div class="cta-content" style="position: relative; z-index: 2;">
       <h2 class="cta-title">Готов начать обучение?</h2>
       <button @click="openModal = true" class="cta-button">
         Забрать бонус за предзапись

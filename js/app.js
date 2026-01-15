@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Маска телефона
+
+  // ==========================================
+  // 1. МАСКА ТЕЛЕФОНА
+  // ==========================================
   const phoneInput = document.getElementById('phone');
   if (phoneInput) {
     phoneInput.addEventListener('input', (e) => {
@@ -13,56 +16,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Circuit Background Animation ---
+  // ==========================================
+  // 2. АНИМАЦИЯ ФОНА (Circuit Background)
+  // ==========================================
   const canvas = document.getElementById('circuit-canvas');
   if (canvas) {
       const ctx = canvas.getContext('2d');
       let width, height;
       let particles = [];
-      // Цвета из картинки-вдохновения: Неоновый голубой и оранжевый
-      const colors = ['#00E5FF', '#FF9100'];
-      const particleCount = 60; // Количество частиц
-      const connectionDistance = 120; // Расстояние для соединения линий
 
-      // Установка размеров канваса
+      const colors = ['#00E5FF', '#FF9100'];
+      const particleCount = 60;
+      const connectionDistance = 120;
+
       function resizeCanvas() {
           const heroSection = document.querySelector('.hero-section');
-          width = canvas.width = heroSection.offsetWidth;
-          height = canvas.height = heroSection.offsetHeight;
+          if (heroSection) {
+            width = canvas.width = heroSection.offsetWidth;
+            height = canvas.height = heroSection.offsetHeight;
+          }
       }
 
-      // Класс частицы
       class Particle {
           constructor() {
               this.x = Math.random() * width;
               this.y = Math.random() * height;
-              // Случайная скорость и направление
               this.vx = (Math.random() - 0.5) * 0.5;
               this.vy = (Math.random() - 0.5) * 0.5;
-              // Размер квадратика
               this.size = Math.random() * 3 + 1;
-              // Случайный цвет из палитры
               this.color = colors[Math.floor(Math.random() * colors.length)];
           }
 
-          // Обновление позиции
           update() {
               this.x += this.vx;
               this.y += this.vy;
-
-              // Отталкивание от стенок
               if (this.x < 0 || this.x > width) this.vx *= -1;
               if (this.y < 0 || this.y > height) this.vy *= -1;
           }
 
-          // Рисование частицы (квадратик)
           draw() {
               ctx.fillStyle = this.color;
               ctx.fillRect(this.x, this.y, this.size, this.size);
           }
       }
 
-      // Инициализация частиц
       function initParticles() {
           particles = [];
           for (let i = 0; i < particleCount; i++) {
@@ -70,40 +67,36 @@ document.addEventListener('DOMContentLoaded', () => {
           }
       }
 
-      // Главный цикл анимации
       function animate() {
           ctx.clearRect(0, 0, width, height);
 
-          // Обновляем и рисуем частицы
           for (let i = 0; i < particles.length; i++) {
               particles[i].update();
               particles[i].draw();
 
-              // Рисуем линии между близкими частицами
               for (let j = i + 1; j < particles.length; j++) {
                   const dx = particles[i].x - particles[j].x;
                   const dy = particles[i].y - particles[j].y;
                   const distance = Math.sqrt(dx * dx + dy * dy);
 
                   if (distance < connectionDistance) {
-                      // Прозрачность линии зависит от расстояния
                       const opacity = 1 - (distance / connectionDistance);
                       ctx.beginPath();
                       ctx.moveTo(particles[i].x + particles[i].size / 2, particles[i].y + particles[i].size / 2);
                       ctx.lineTo(particles[j].x + particles[j].size / 2, particles[j].y + particles[j].size / 2);
 
-                      // Цвет линии зависит от цвета первой частицы
                       const rgb = hexToRgb(particles[i].color);
-                      ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity * 0.5})`;
-                      ctx.lineWidth = 1;
-                      ctx.stroke();
+                      if (rgb) {
+                        ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity * 0.5})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                      }
                   }
               }
           }
           requestAnimationFrame(animate);
       }
 
-      // Вспомогательная функция для конвертации HEX в RGB
       function hexToRgb(hex) {
           const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
           return result ? {
@@ -113,10 +106,71 @@ document.addEventListener('DOMContentLoaded', () => {
           } : null;
       }
 
-      // Запуск
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
       initParticles();
       animate();
   }
+
+  // ==========================================
+  // 3. SPACESHIP CONTROLLER
+  // ==========================================
+  class SpaceshipController {
+    constructor() {
+      this.container = document.querySelector('.hero-section');
+      this.ship = document.getElementById('hero-ship');
+
+      if (!this.container || !this.ship) return;
+      this.init();
+    }
+
+    init() {
+      // Плавное появление
+      const showShip = () => {
+        this.ship.classList.add('loaded');
+      };
+
+      if (this.ship.complete) {
+        showShip();
+      } else {
+        this.ship.onload = showShip;
+      }
+
+      // Parallax эффект
+      this.container.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+      window.addEventListener('scroll', () => this.handleScroll());
+    }
+
+    handleMouseMove(e) {
+      const rect = this.container.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      const moveX = x * 0.02;
+      const moveY = y * 0.03;
+      const rotateX = y * -0.01;
+      const rotateY = x * 0.01;
+
+      requestAnimationFrame(() => {
+        this.ship.style.transform = `
+          translate(${moveX}px, ${moveY}px)
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
+        `;
+      });
+    }
+
+    handleScroll() {
+      const scrollY = window.scrollY;
+      if (scrollY < 800) {
+        requestAnimationFrame(() => {
+           // Легкий сдвиг для глубины
+           this.ship.style.top = `calc(45% + ${scrollY * 0.1}px)`;
+        });
+      }
+    }
+  }
+
+  new SpaceshipController();
+
 });
