@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+  
   // ==========================================
   // 1. МАСКА ТЕЛЕФОНА
   // ==========================================
@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (phoneInput) {
     phoneInput.addEventListener('input', (e) => {
       let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-      // Форматирование для российских номеров
       if (!x[2]) {
         e.target.value = x[1];
       } else {
@@ -24,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const ctx = canvas.getContext('2d');
       let width, height;
       let particles = [];
-
+      
       const colors = ['#00E5FF', '#FF9100'];
-      const particleCount = 60;
-      const connectionDistance = 120;
+      const particleCount = 60; 
+      const connectionDistance = 120; 
 
       function resizeCanvas() {
           const heroSection = document.querySelector('.hero-section');
@@ -113,48 +112,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 3. SPACESHIP CONTROLLER
+  // 3. SPACESHIP CONTROLLER (INSTANT & SMOOTH)
   // ==========================================
   class SpaceshipController {
     constructor() {
       this.container = document.querySelector('.hero-section');
       this.ship = document.getElementById('hero-ship');
-
+      
       if (!this.container || !this.ship) return;
       this.init();
     }
 
     init() {
-      // Плавное появление
-      const showShip = () => {
-        this.ship.classList.add('loaded');
-      };
-
+      // 1. Сразу показываем корабль (плавный fade-in через CSS)
       if (this.ship.complete) {
-        showShip();
+        this.ship.classList.add('loaded');
       } else {
-        this.ship.onload = showShip;
+        this.ship.onload = () => {
+          this.ship.classList.add('loaded');
+        };
       }
 
-      // Parallax эффект
+      // 2. Сразу включаем слежение за мышью (конфликта с CSS больше нет)
       this.container.addEventListener('mousemove', (e) => this.handleMouseMove(e));
       window.addEventListener('scroll', () => this.handleScroll());
     }
 
     handleMouseMove(e) {
+      // Проверка, чтобы не считать лишнего, если корабль не виден
+      if (!this.ship.classList.contains('loaded')) return;
+
       const rect = this.container.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
 
-      const moveX = x * 0.02;
-      const moveY = y * 0.03;
-      const rotateX = y * -0.01;
-      const rotateY = x * 0.01;
+      // Коэффициенты движения
+      const moveX = x * 0.02; 
+      const moveY = y * 0.03; 
+      const rotateX = y * -0.01; 
+      const rotateY = x * 0.01;  
 
       requestAnimationFrame(() => {
+        // translateY(-50%) - это "якорь" для вертикального центрирования
         this.ship.style.transform = `
-          translate(${moveX}px, ${moveY}px)
-          rotateX(${rotateX}deg)
+          translateY(-50%) 
+          translate(${moveX}px, ${moveY}px) 
+          rotateX(${rotateX}deg) 
           rotateY(${rotateY}deg)
         `;
       });
@@ -164,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const scrollY = window.scrollY;
       if (scrollY < 800) {
         requestAnimationFrame(() => {
-           // Легкий сдвиг для глубины
+           // Меняем только top при скролле
            this.ship.style.top = `calc(45% + ${scrollY * 0.1}px)`;
         });
       }

@@ -334,7 +334,7 @@ body {
   line-height: 1.6;
 }
 
-/* --- Offers Section --- */
+/* --- Offers Section (Sticky Header) --- */
 .offers-section {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -345,23 +345,18 @@ body {
   box-shadow: var(--shadow-card);
 }
 
+/* Липкий сайдбар */
+.offers-sidebar {
+  position: sticky;
+  top: 40px;
+  height: fit-content;
+  align-self: start;
+}
+
 .offers-title {
   font-size: 28px;
   line-height: 1.2;
   margin: 0;
-}
-
-.offers-sidebar {
-  /* Делаем блок липким */
-  position: sticky;
-
-  /* Отступ сверху (чтобы не прилипал вплотную к краю браузера) */
-  top: 40px;
-
-  /* ВАЖНО: В гридах элемент по умолчанию растягивается на всю высоту.
-     Нам нужно сжать его до высоты контента, иначе sticky не сработает. */
-  height: fit-content;
-  align-self: start;
 }
 
 .offers-grid {
@@ -391,7 +386,7 @@ body {
   color: #666;
 }
 
-/* --- CTA Section (Clean Full Width / Чистый, без затемнения краев) --- */
+/* --- CTA Section (CLEAN FULL WIDTH) --- */
 .cta-section {
   width: 100%;
   max-width: 100%;
@@ -399,16 +394,16 @@ body {
   border-radius: 0;
   padding: 100px 20px;
 
-  /* Фон: Чистый градиент без перекрытия тенями */
+  /* Чистый градиент */
   background:
     radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%),
     linear-gradient(135deg, #1C1E26 0%, #0F0F10 100%);
 
   border: none;
-  border-top: 1px solid rgba(0, 229, 255, 0.3); /* Светящаяся грань сверху */
+  border-top: 1px solid rgba(0, 229, 255, 0.3); /* Акцент сверху */
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-  /* УБРАЛИ агрессивные тени. Оставили только легкий внутренний блик для чистоты */
+  /* Легкий блик (без темной виньетки) */
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
 
   text-align: center;
@@ -609,10 +604,10 @@ body {
 [x-cloak] { display: none !important; }
 
 /* ==========================================================================
-   SPACESHIP & DECORATION STYLES
+   SPACESHIP & DECORATION STYLES (FINAL)
    ========================================================================== */
 
-/* --- 1. Hero Spaceship (Main) --- */
+/* --- 1. Hero Spaceship --- */
 .spaceship-layer {
   position: absolute;
   top: 0;
@@ -628,17 +623,17 @@ body {
   position: absolute;
   top: 45%;
   left: 25%;
-  transform: translateY(-50%) scale(0.9);
+  transform: translateY(-50%);
   max-width: 60%;
   height: auto;
   filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
   opacity: 0;
-  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 1.5s ease-out;
+  will-change: transform, opacity;
 }
 
 .spaceship-img.loaded {
   opacity: 1;
-  transform: translateY(-50%) scale(1);
 }
 
 @media (max-width: 900px) {
@@ -649,45 +644,73 @@ body {
     left: 50%;
     transform: translate(-50%, 20px);
   }
-
-  .spaceship-img.loaded {
-      transform: translate(-50%, 0);
-  }
 }
 
-/* --- 2. Decorative Ships --- */
+/* --- 2. Decorative Ships (CTA & SECTIONS) --- */
 
+/* Базовый контейнер для декора */
 .ship-decoration-container {
     position: absolute;
+    /* Полное покрытие родительского блока по умолчанию */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     pointer-events: none;
+    overflow: hidden;
 }
 
+/* Базовый стиль картинки (по умолчанию заполняет контейнер) */
 .ship-decoration-img {
-    width: 100%;
-    height: auto;
     display: block;
+    height: auto;
+    width: 100%; /* Для обычных картинок */
     animation: floatShip 6s ease-in-out infinite;
 }
 
-/* Profile View */
-.profile-view {
+/* --- PROFILE VIEW (Секция "Что будет") --- */
+/* Здесь мы модифицируем КОНТЕЙНЕР, а картинка просто внутри него */
+.ship-decoration-container.profile-view {
     top: -80px;
     right: 5%;
+    left: auto; /* Сброс left:0 */
     width: 350px;
-    opacity: 1;
+    height: auto;
+    overflow: visible;
+
+    opacity: 0.9;
     transform: rotate(-5deg);
     filter: grayscale(20%) sepia(20%) hue-rotate(180deg) saturate(200%);
 }
 
-/* Rear View */
+/* --- REAR VIEWS (Секция CTA) --- */
+/* Здесь контейнер занимает весь блок, а картинки позиционируются абсолютно */
+
 .rear-view {
-    bottom: -120px;
+    position: absolute; /* ВАЖНО */
+    bottom: 0px;
     left: 10%;
     width: 450px;
-    opacity: 1;
+    opacity: 0.95;
     mix-blend-mode: screen;
 }
+
+.rear-view-right {
+    position: absolute; /* ВАЖНО */
+    bottom: -5px;
+    right: 15%;
+    width: 300px;
+    opacity: 0.5;
+
+    transform: scaleX(-1); /* Отражение */
+    mix-blend-mode: screen;
+
+    animation-name: floatShipRight; /* Своя анимация для зеркального */
+    animation-delay: -2s;
+}
+
+/* --- Animations --- */
 
 @keyframes floatShip {
     0% { transform: translateY(0px); }
@@ -695,18 +718,33 @@ body {
     100% { transform: translateY(0px); }
 }
 
+@keyframes floatShipRight {
+    /* Сохраняем scaleX(-1) во время движения */
+    0% { transform: translateY(0px) scaleX(-1); }
+    50% { transform: translateY(-20px) scaleX(-1); }
+    100% { transform: translateY(0px) scaleX(-1); }
+}
+
+/* --- Mobile Adaptation for Decorations --- */
 @media (max-width: 900px) {
-    .profile-view {
+    /* Profile */
+    .ship-decoration-container.profile-view {
         width: 180px;
         top: -20px;
         right: 0;
-        opacity: 0.85;
     }
 
+    /* CTA Ships */
     .rear-view {
-        width: 280px;
-        bottom: -60px;
-        left: 0;
-        opacity: 1;
+        width: 220px;
+        bottom: -40px;
+        left: -20px;
+    }
+
+    .rear-view-right {
+        width: 160px;
+        bottom: -30px;
+        right: -20px;
+        opacity: 0.95;
     }
 }
