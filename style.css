@@ -91,13 +91,22 @@ body {
 
 /* --- Hero Section --- */
 .hero-section {
-  /* Changed background to dark to match inspiration */
+  /* Dark background for neon effect */
   background: #11141C;
+
+  /* Spacing */
   padding: 60px 0 80px;
-  border-bottom: 1px solid #2A2C38;
-  margin-bottom: 40px;
+
+  /* --- STRICT DESIGN UPDATES --- */
+  margin: 12px auto 40px;
+  border-radius: 24px;
+  max-width: 1280px;
+  width: calc(100% - 24px);
+  border: 1px solid #2A2C38;
+  /* --------------------------- */
+
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Clips the canvas */
 }
 
 /* Canvas positioning */
@@ -108,7 +117,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0; /* Behind content */
-  pointer-events: none; /* Ensures clicks go through to buttons */
+  pointer-events: none;
 }
 
 /* Ensure content sits above canvas */
@@ -147,13 +156,12 @@ body {
   line-height: 1.1;
   letter-spacing: -1px;
   margin: 0 0 24px;
-  /* Changed color to white for dark background */
+  /* White text for dark background */
   color: white;
 }
 
 .hero-subtitle {
   font-size: 20px;
-  /* Changed color to light gray */
   color: #B0B3B8;
   margin-bottom: 40px;
   max-width: 600px;
@@ -223,12 +231,12 @@ body {
   border-radius: var(--radius-md);
   padding: 20px;
   box-shadow: var(--shadow-card);
-  /* Slight glow for dark background contrast */
+  /* Slight glow for dark background contrast context */
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .stats-card {
-  /* Darker background for stats card to pop */
+  /* Darker background for stats card */
   background: #0A0C12;
   color: white;
   border-radius: var(--radius-md);
@@ -243,7 +251,6 @@ body {
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 4px;
-  /* Used neon cyan instead of green for hero consistency */
   color: var(--neon-cyan);
 }
 
@@ -336,7 +343,7 @@ body {
   line-height: 1.6;
 }
 
-/* --- Offers Section (Sidebar layout) --- */
+/* --- Offers Section --- */
 .offers-section {
   display: grid;
   grid-template-columns: 280px 1fr;
